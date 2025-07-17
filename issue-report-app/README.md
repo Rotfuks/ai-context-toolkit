@@ -8,10 +8,41 @@ A TypeScript application for generating comprehensive issue reports from GitHub 
 - 📊 Generate detailed issue reports with proper categorization
 - 🎯 Group issues by Kind (Story, Request, Postmortem, Other)
 - 📝 Create TL;DR summaries with appropriate tense based on status
-- 🌐 Modern web UI for easy report generation
+- 🚀 **NEW: Bulk Status Updates** - Automatically move all issues in a report to a new status
+- 🌐 Modern web UI for easy report generation and status management
 - ⚡ Built-in rate limiting and error handling
 - 🔐 Secure token-based authentication
 - 📝 Comprehensive TypeScript types
+
+## Status Update Functionality
+
+### Overview
+The app now includes powerful bulk status management capabilities. After generating a report, you can automatically update the Status field of all issues listed in that report to a new status. This feature is perfect for workflow automation and project management.
+
+### How It Works
+1. **Generate a Report**: Create a report for a specific team and status
+2. **Select New Status**: Choose the desired new status from the dropdown in the report header
+3. **Bulk Update**: Click "Move Issues" to automatically update all issues in the report
+4. **Review Results**: See detailed feedback on which issues were successfully updated and any failures
+
+### Key Features
+- **Smart Filtering**: Only non-Epic issues are moved (Epics are protected from status changes)
+- **Batch Processing**: Efficiently processes multiple issues with proper rate limiting
+- **Error Handling**: Comprehensive error reporting for failed updates
+- **Real-time Feedback**: Immediate visual feedback on success/failure
+- **Safe Operations**: Built-in safeguards to prevent accidental changes
+
+### Technical Implementation
+- **GraphQL Mutations**: Uses `updateProjectV2ItemFieldValue` mutation for efficient updates
+- **Rate Limiting**: Respects GitHub API rate limits with built-in delays
+- **Error Handling**: Detailed error reporting for failed updates
+- **Schema Discovery**: Dynamically discovers field configurations
+- **Data Reuse**: Uses stored report data to avoid redundant API calls
+
+### API Endpoints
+- `POST /api/update-report-status`: Updates status for all issues in a report
+  - Body: `{ report: string, newStatus: string }`
+  - Response: `{ success: boolean, updated: number, failed: number, totalIssues: number, errors: Array, message: string }`
 
 ## Prerequisites
 
@@ -27,6 +58,7 @@ A TypeScript application for generating comprehensive issue reports from GitHub 
    - `repo` (for private repositories)
    - `public_repo` (for public repositories)
    - `read:org` (for organization projects)
+   - `write:org` (for organization project updates)
 4. Copy the generated token
 
 ## Installation
@@ -81,10 +113,11 @@ cd ui && npm start
 4. Select Team and Status, then click "Generate Report"
 
 **Features:**
-- 🎨 Modern, responsive design
+- 🎨 Modern, responsive design with Giant Swarm branding
 - 📊 Real-time report preview with markdown rendering
 - 📋 Copy to clipboard functionality
 - 💾 Download as markdown file
+- 🚀 Bulk status updates for workflow automation
 - ⚡ Loading states and error handling
 - 🎯 Filter by Team and Status with viable options only
 
@@ -112,12 +145,14 @@ Each report includes a concise summary with:
 ### Epic Handling
 - Epic issues are excluded from all sections except as parents
 - Only Epics with children in the report are shown as parent initiatives
+- Epic issues are protected from status changes during bulk updates
 
 ## API Endpoints
 
 - `GET /api/health` - Health check endpoint
 - `GET /api/roadmap-options` - Get available teams and statuses
 - `POST /api/generate-report` - Generate issue report
+- `POST /api/update-report-status` - Update status for all issues in a report
 
 ### Example API Usage
 
@@ -129,6 +164,11 @@ curl http://localhost:3001/api/roadmap-options
 curl -X POST http://localhost:3001/api/generate-report \
   -H "Content-Type: application/json" \
   -d '{"team":"Atlas 🗺️","status":"In Progress ⛏️"}'
+
+# Update report status
+curl -X POST http://localhost:3001/api/update-report-status \
+  -H "Content-Type: application/json" \
+  -d '{"report":"# Team Atlas Issue Report...","newStatus":"Done ✅"}'
 ```
 
 ## Project Structure
@@ -158,7 +198,7 @@ The application is built with:
 - **Backend**: Node.js, Express, TypeScript
 - **Frontend**: React, TypeScript
 - **API**: GitHub REST and GraphQL APIs
-- **Styling**: CSS modules
+- **Styling**: CSS with Giant Swarm branding
 
 ### Development Commands
 
@@ -202,6 +242,11 @@ npm test                   # Run tests
 4. **Frontend not loading**
    - Ensure the UI is built: `cd ui && npm run build`
    - Check that the server is running on port 3001
+
+5. **Status updates failing**
+   - Verify your token has `write:org` permissions
+   - Check that the target status exists in your project
+   - Ensure issues are not Epic type (Epics cannot have status changed)
 
 ### Debug Mode
 
