@@ -359,7 +359,7 @@ export class GitHubAPIService {
     owner: string,
     repo: string,
     issueNumber: number
-  ): Promise<(GitHubProject & { status?: string; team?: string; kind?: string; parentIssue?: { number: number; title: string; url: string } })[]> {
+  ): Promise<(GitHubProject & { status?: string; team?: string; kind?: string; parentIssue?: { number: number; title: string; url: string; closed: boolean } })[]> {
     try {
       const query = `
         query GetIssueLinkedProjects($owner: String!, $repo: String!, $issueNumber: Int!) {
@@ -370,6 +370,7 @@ export class GitHubAPIService {
                 number
                 title
                 url
+                closed
               }
               projectsV2(first: 10) {
                 nodes {
@@ -450,6 +451,7 @@ export class GitHubAPIService {
                           number
                           title
                           url
+                          closed
                         }
                       }
                     }
@@ -567,7 +569,8 @@ export class GitHubAPIService {
         projectResult.parentIssue = {
           number: parentIssue.number,
           title: parentIssue.title,
-          url: parentIssue.url
+          url: parentIssue.url,
+          closed: parentIssue.closed
         };
       }
       
@@ -659,6 +662,7 @@ export class GitHubAPIService {
       number: number;
       title: string;
       url: string;
+      closed: boolean;
     };
   }>> {
     try {
@@ -716,6 +720,7 @@ export class GitHubAPIService {
                           number
                           title
                           url
+                          closed
                         }
                       }
                     }
@@ -794,7 +799,8 @@ export class GitHubAPIService {
             parentIssue: item.content.parent ? {
               number: item.content.parent.number,
               title: item.content.parent.title,
-              url: item.content.parent.url
+              url: item.content.parent.url,
+              closed: item.content.parent.closed
             } : undefined
           });
         }

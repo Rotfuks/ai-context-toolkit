@@ -12,6 +12,7 @@ interface ReportIssue {
     number: number;
     title: string;
     url: string;
+    closed: boolean;
   };
 }
 
@@ -130,6 +131,9 @@ export class IssueReportGenerator {
         case 'Postmortem 🚧':
           operationalWork.push(reportIssue);
           break;
+        case 'Operational ⚙️':
+          operationalWork.push(reportIssue);
+        break;
         default:
           otherIssues.push(reportIssue);
           break;
@@ -204,9 +208,17 @@ export class IssueReportGenerator {
           const parentIssue = childIssues[0]?.parentIssue;
           if (parentIssue) {
             if (this.isParentCompleted(childIssues)) {
-              completedParents.push({ ...parentIssue, repository: this.extractRepoNameFromUrl(parentIssue.url) } as ReportIssue);
+              completedParents.push({ 
+                ...parentIssue, 
+                repository: this.extractRepoNameFromUrl(parentIssue.url),
+                state: parentIssue.closed ? 'closed' : 'open'
+              } as ReportIssue);
             } else {
-              inProgressParents.push({ ...parentIssue, repository: this.extractRepoNameFromUrl(parentIssue.url) } as ReportIssue);
+              inProgressParents.push({ 
+                ...parentIssue, 
+                repository: this.extractRepoNameFromUrl(parentIssue.url),
+                state: parentIssue.closed ? 'closed' : 'open'
+              } as ReportIssue);
             }
           }
         }
@@ -341,10 +353,17 @@ export class IssueReportGenerator {
   }
 
   /**
-   * Check if a parent issue is completed (all children are closed)
+   * Check if a parent issue is completed (parent issue itself is closed)
    */
   private isParentCompleted(childIssues: ReportIssue[]): boolean {
-    return childIssues.every(issue => issue.state === 'closed');
+    // Get the parent issue from the first child (all children should have the same parent)
+    const parentIssue = childIssues[0]?.parentIssue;
+    if (!parentIssue) {
+      return false; // No parent issue means it can't be completed
+    }
+    
+    // Check if the parent issue itself is closed
+    return parentIssue.closed === true;
   }
 
   /**
@@ -574,9 +593,17 @@ export class IssueReportGenerator {
           const parentIssue = childIssues[0]?.parentIssue;
           if (parentIssue) {
             if (this.isParentCompleted(childIssues)) {
-              completedParents.push({ ...parentIssue, repository: this.extractRepoNameFromUrl(parentIssue.url) } as ReportIssue);
+              completedParents.push({ 
+                ...parentIssue, 
+                repository: this.extractRepoNameFromUrl(parentIssue.url),
+                state: parentIssue.closed ? 'closed' : 'open'
+              } as ReportIssue);
             } else {
-              inProgressParents.push({ ...parentIssue, repository: this.extractRepoNameFromUrl(parentIssue.url) } as ReportIssue);
+              inProgressParents.push({ 
+                ...parentIssue, 
+                repository: this.extractRepoNameFromUrl(parentIssue.url),
+                state: parentIssue.closed ? 'closed' : 'open'
+              } as ReportIssue);
             }
           }
         }
