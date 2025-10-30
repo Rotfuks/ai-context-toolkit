@@ -1,0 +1,30 @@
+{
+  "name": "giantswarm-report-generator",
+  "version": "1.0.0",
+  "description": "Professional PDF report generator implementing Giant Swarm's official brand guidelines. Transforms Markdown files into beautifully formatted A4 PDFs with proper typography, logo integration, and intelligent page breaks.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "generate-report": "npm run build && node dist/index.js"
+  },
+  "keywords": ["giant-swarm", "pdf", "markdown", "reports", "branding", "typescript", "professional", "documentation", "platform-engineering"],
+  "author": "Giant Swarm Platform Engineering Team",
+  "license": "MIT",
+  "dependencies": {
+    "md-to-pdf": "^5.2.4",
+    "commander": "^11.1.0",
+    "chalk": "^4.1.2",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/fs-extra": "^11.0.4",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
+  },
+  "bin": {
+    "giantswarm-report-generator": "./dist/index.js"
+  }
+}
