@@ -52,38 +52,43 @@
 - **Scope:** Each issue should be achievable and appropriately sized
 - **Language:** Use clear, professional language; avoid internal jargon
 - **Formatting:** Use markdown with h3 (###) for sections and checkboxes for lists
+- **Conciseness:** Keep issues brief and scannable - engineers should understand scope in under 2 minutes of reading
 
 ## Issue Section Content Guidelines
 
 ### Required Sections
 
-**Motivation**
+**Motivation** (2-4 sentences max)
 - Why is this needed?
 - What customer pain point does it address?
 - Connect to business goals
+- **Keep brief** - one short paragraph
 
-**Todo**
+**Todo** (3-5 items max)
 - High-level implementation steps
 - Use checkboxes (`- [ ]`)
 - Keep general, avoid deep technical details
+- **Single line per item**
 
-**Outcome**
+**Outcome** (2-3 sentences max)
 - Positive impact for customers
 - Measurable business benefits
-- Long-term value proposition
+- **Be specific and concise**
 
-**Acceptance Criteria**
+**Acceptance Criteria** (3-5 items max)
 - Immediately testable deliverables
 - Use checkboxes (`- [ ]`)
 - Focus on implementation completion
-- Include validation steps
+- **Single line per item**
 
 ### Optional Sections
 
-**Technical Hints**
-- Brief technical suggestions
-- Keep minimal and non-prescriptive
-- Only include if helpful for implementation
+**Technical Hints** (bullet points, 3-5 items max)
+- Brief technical pointers only
+- Use bullet points for scannability
+- **Only include if truly necessary**
+- Keep each point to one line
+- Link to docs rather than explaining
 
 ## Team Label Requirements
 
@@ -121,13 +126,15 @@ Before finalizing any issue, verify:
 - [ ] Title follows outcome-oriented format with immediate, achievable impact
 - [ ] Title focuses on customer value, not technical implementation
 - [ ] Title avoids absolute numbers/percentages (use qualitative outcomes instead)
-- [ ] Motivation clearly states the business problem
-- [ ] Todo items are actionable but not overly detailed
-- [ ] Outcome describes measurable customer benefits (specific metrics can be mentioned here)
-- [ ] Acceptance criteria are immediately testable deliverables
+- [ ] Motivation is 2-4 sentences max (one short paragraph)
+- [ ] Todo items are 3-5 items, single line each
+- [ ] Outcome is 2-3 sentences max
+- [ ] Acceptance criteria are 3-5 items, single line each
+- [ ] Technical hints are bullet points (if included), max 5 items
 - [ ] Team label is specified and appropriate
 - [ ] Language is clear and professional
 - [ ] No internal jargon without explanation
+- [ ] **Overall issue is scannable in under 2 minutes**
 
 ## Common Mistakes to Avoid
 
@@ -137,6 +144,9 @@ Before finalizing any issue, verify:
 4. **Implementation in acceptance criteria**: "Reduce support tickets" → "Documentation is published and accessible"
 5. **Missing team labels**: Always ask if not provided
 6. **Internal jargon**: Explain acronyms and technical terms
+7. **Wall of text**: Keep sections concise - if Motivation is more than 4 sentences, it's too long
+8. **Too many items**: More than 5 Todo or Acceptance Criteria items indicates scope is too large
+9. **Explanatory text**: Link to docs instead of explaining concepts in the issue
 
 ## What NOT to Include
 - Deep technical implementation details

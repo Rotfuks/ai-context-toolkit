@@ -48,6 +48,7 @@
 - **Never Overused**: Maintains professional tone while adding personality
 
 ### Hashtag Strategy
+- **Maximum 3 Hashtags**: Keep it focused and avoid hashtag spam
 - **Mix of Popular & Niche**: #CloudNative, #Observability, #PlatformEngineering
 - **Company/Event Tags**: #GiantSwarm, #OSMC25, #CNSMunich
 - **Personal Branding**: Focus on expertise areas
