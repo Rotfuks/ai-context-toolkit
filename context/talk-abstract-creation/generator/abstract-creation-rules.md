@@ -41,6 +41,8 @@
 - **Differentiation-Conscious:** Explicitly states what makes this talk different from others
 - **Value-Explicit:** Crystal clear about who should attend and what they'll get
 
+- **⚠️ Critical:** Do not use typical AI language patterns like "it's not about...it's about", "delve into", or others. 
+
 ---
 
 ## Technical Content Guidelines
