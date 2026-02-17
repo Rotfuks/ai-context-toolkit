@@ -1,146 +1,45 @@
-# GitHub AI Development Toolkit
+# GitHub AI Toolkit
 
-This repository contains a comprehensive toolkit for working with GitHub APIs and generating automated reports. It includes both a production-ready application and extensive development documentation for AI-assisted development.
+A collection of AI-assisted workflows, Cursor commands, and context documents for working with GitHub APIs, generating reports, and creating content.
 
-## 🚀 What's Included
+## What's in here
 
-### 📊 Issue Report Generator App
-A complete TypeScript application that generates comprehensive issue reports from GitHub Projects:
+| Directory | What it does |
+|-----------|-------------|
+| `.cursor/commands/` | Cursor slash commands for GitHub reports, issue creation, LinkedIn posts, and more |
+| `.cursor/skills/` | Cursor agent skills for Google Drive integration (MCP + rclone) |
+| `context/` | Reference materials and prompt engineering context (GitHub API guide, one-pager creation, talk abstract creation) |
+| `issue-report-app/` | TypeScript app that generates issue reports from GitHub Projects (Node + React) |
+| `gdrive-mcp-server/` | Custom MCP server for reading Google Drive files (Docs, Sheets, PDFs, images) |
+| `workbench/` | Gitignored scratch space for session artifacts and temporary files |
 
-- **Smart Issue Categorization**: Automatically groups issues by Kind (Story, Request, Postmortem, Other)
-- **Intelligent Tense Handling**: Uses appropriate past/present/future tense based on issue status
-- **Modern Web UI**: React-based interface with real-time preview and markdown export
-- **GitHub API Integration**: Full REST and GraphQL API support with rate limiting
+## Cursor Commands
 
-**📍 Location**: `issue-report-app/`  
-**🚀 Quick Start**: `cd issue-report-app && ./start.sh`
+- **my-issues-report** — Report of all open GitHub issues assigned to me
+- **issue-pings-report** — Unanswered GitHub mentions/pings
+- **alerts-report** — Alerts summary from a Google Drive document
+- **platform-area-report** — Meeting notes summary from Google Drive
+- **create-issue** — Guided issue creation with quality checklist
+- **linkedin-post** — LinkedIn ghostwriter with voice cloning
 
-### 📚 Development Context & Reference Materials
-Comprehensive documentation and reference materials for development work:
+## Getting Started
 
-- **GitHub API Development Guide**: Complete context for working with GitHub's REST and GraphQL APIs
-- **Issue Creation Workflows**: Detailed instructions for automated issue management
-- **Reference Documentation**: Curated context materials for development tasks
-
-**📍 Location**: `context/`
-
-### 🛠️ Temporary Workspace
-A dedicated area for session-based artifacts and temporary files:
-
-- **Session Artifacts**: Temporary documents, configurations, and prototypes
-- **Development Workspace**: Staging area for work-in-progress items
-- **Usage Guidelines**: Clear rules for workbench organization and cleanup
-
-**📍 Location**: `workbench/`
-
-## 🎯 Use Cases
-
-### For Developers
-- Generate automated issue reports for team standups
-- Create comprehensive project status summaries
-- Automate GitHub project management workflows
-- Build custom GitHub API integrations
-
-### For AI Assistants
-- Understand GitHub API patterns and best practices
-- Learn proper error handling and rate limiting
-- Get context for building GitHub automation tools
-- Access proven templates for common GitHub workflows
-
-## 🏗️ Project Structure
-
-```
-github-ai/
-├── workbench/                 # Temporary workspace for session artifacts
-│   └── README.md              # Workbench usage guidelines
-├── context/                   # Development context and reference materials
-│   ├── github-api-development.md  # Complete GitHub API guide
-│   └── issue-creation/            # Issue workflow documentation
-├── issue-report-app/          # Production application
-│   ├── src/                   # Backend (Node.js + Express + TypeScript)
-│   ├── ui/                    # Frontend (React + TypeScript)
-│   ├── start.sh               # One-command startup script
-│   └── README.md              # Detailed app documentation
-└── README.md                  # This overview file
-```
-
-## 🚀 Getting Started
-
-### Option 1: Use the Application
+### Issue Report App
 ```bash
 cd issue-report-app
+cp env.example .env  # add your GitHub token
 ./start.sh
 ```
-Visit http://localhost:3001 to generate issue reports.
 
-### Option 2: Explore Development Context
-Browse the `context/` folder for comprehensive guides on:
-- GitHub API development patterns
-- Automated issue management
-- Development workflows and reference materials
+### Google Drive MCP Server
+```bash
+cd gdrive-mcp-server
+npm run auth-setup   # one-time OAuth flow
+npm run build && npm start
+```
 
-### Option 3: Use the Workbench
-The `workbench/` folder serves as your temporary workspace:
-- Create and iterate on artifacts safely
-- Stage work-in-progress files
-- Follow the established workflow for moving finalized content
+See each subdirectory's README for detailed setup.
 
-## 🔧 Key Features
+## License
 
-### Application Features
-- ✅ **Team & Status Filtering**: Dynamic filtering with viable options only
-- ✅ **Smart Categorization**: Automatic grouping by issue type
-- ✅ **Tense-Aware Reports**: Context-appropriate language
-- ✅ **Epic Handling**: Intelligent parent/child relationship management
-- ✅ **Modern UI**: Responsive design with real-time preview
-- ✅ **API-First Design**: RESTful endpoints for integration
-
-### Development Features
-- ✅ **TypeScript**: Full type safety throughout
-- ✅ **Rate Limiting**: Built-in GitHub API protection
-- ✅ **Error Handling**: Comprehensive error management
-- ✅ **Modular Architecture**: Clean separation of concerns
-- ✅ **Documentation**: Extensive inline and external docs
-
-## 📂 Directory Guide
-
-### `/workbench/` - Temporary Workspace
-Your go-to location for all session-based work:
-- **All new artifacts start here** [[memory:5364781]]
-- Temporary documents, scripts, and configurations
-- Work-in-progress files and experimental code
-- See `workbench/README.md` for complete usage guidelines
-
-### `/context/` - Development Reference Materials
-Curated documentation and development context:
-
-#### `github-api-development.md`
-- Complete GitHub API development patterns
-- REST vs GraphQL selection guidelines
-- Rate limiting and error handling strategies
-- Schema discovery and validation techniques
-- Common pitfalls and solutions
-
-#### `issue-creation/`
-- Automated issue creation workflows
-- Template-based issue generation
-- Label and assignee management
-- Cross-repository issue linking
-
-### `/issue-report-app/` - Production Application
-Ready-to-use application for generating GitHub issue reports with comprehensive documentation in its own README.
-
-## 🔗 Quick Links
-
-- **[Application Documentation](issue-report-app/README.md)** - Detailed app setup and usage
-- **[Workbench Guidelines](workbench/README.md)** - Temporary workspace usage rules
-- **[GitHub API Guide](context/github-api-development.md)** - Complete API development context
-- **[Issue Creation Workflows](context/issue-creation/)** - Automated issue management
-
-## 📄 License
-
-MIT License - Feel free to use this toolkit for your own GitHub automation projects!
-
----
-
-**💡 Tip**: This repository serves as both a working application and a comprehensive reference for GitHub API development. The context folder provides valuable reference materials, while the workbench serves as your temporary workspace for all session-based development work.
+MIT

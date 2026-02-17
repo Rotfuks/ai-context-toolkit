@@ -36,6 +36,10 @@ Thumbs.db
 logs/
 *.log
 
+# MCP server build artifacts
+gdrive-mcp-server/node_modules/
+gdrive-mcp-server/dist/
+
 # Workbench directory - ignore everything except README.md
 # This ensures temporary files and sensitive information are never committed
 workbench/*
